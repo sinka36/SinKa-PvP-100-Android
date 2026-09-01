@@ -5,7 +5,7 @@ package.domain = tr.sinka
 source.dir = .
 source.include_exts = py,png,jpg,jpeg,kv,atlas,ttf
 version = 1.0.0
-requirements = python3,kivy,pillow
+requirements = python3==3.11.9,kivy==2.3.1,pillow
 orientation = landscape
 fullscreen = 0
 
@@ -22,5 +22,5 @@ warn_on_root = 1
 
 [app:android]
 android.private_storage = True
-android.add_src = 
+android.add_src =
 android.entrypoint = org.kivy.android.PythonActivity
