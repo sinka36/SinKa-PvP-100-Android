@@ -42,9 +42,13 @@ CPM_VALUES=[0.094,0.135137432,0.16639787,0.192650919,0.21573247,0.236572661,0.25
 CPM={1.0+i*.5:v for i,v in enumerate(CPM_VALUES)}; LEVELS=list(CPM.keys())
 
 def get_json(url):
-    req=Request(url,headers={"User-Agent":"SinKa-PvP-100-Android/1.0"})
-    with urlopen(req,timeout=30) as r: return json.loads(r.read().decode('utf-8'))
-
+    req = Request(
+        url,
+        headers={"User-Agent": "SinKa-PvP-100-Android/1.0"}
+    )
+    ssl_ctx = ssl.create_default_context(cafile=certifi.where())
+    with urlopen(req, timeout=30, context=ssl_ctx) as r:
+        return json.loads(r.read().decode("utf-8"))
 def calc_cp(base, ivs, level):
     cpm=CPM[level]; a=(base['atk']+ivs[0])*cpm; d=(base['def']+ivs[1])*cpm; h=(base['hp']+ivs[2])*cpm
     return math.floor(a*math.sqrt(d)*math.sqrt(h)/10)
