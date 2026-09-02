@@ -9,8 +9,10 @@ on:
 jobs:
   build:
     runs-on: ubuntu-22.04
+    timeout-minutes: 60
 
     steps:
+
       - name: Checkout
         uses: actions/checkout@v4
 
@@ -49,8 +51,12 @@ jobs:
       - name: Install Buildozer
         run: |
           python -m pip install --upgrade pip setuptools wheel
-          pip install buildozer
+          pip install buildozer==1.5.0
           pip install "cython<3.4"
+
+      - name: Remove old Buildozer project cache
+        run: |
+          rm -rf .buildozer
 
       - name: Build APK
         run: |
